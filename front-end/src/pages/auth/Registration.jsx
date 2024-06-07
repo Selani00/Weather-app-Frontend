@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Label, TextInput } from "flowbite-react";
 import { Link } from "react-router-dom";
+import GoogleAuth from "../../components/GoogleAuth";
 
 const Registration = () => {
   const [formData, setFormData] = useState({});
@@ -90,6 +91,7 @@ const Registration = () => {
             <Button type="submit" value="Login" gradientDuoTone="purpleToPink">
               Register
             </Button>
+            <GoogleAuth/>
           </form>
 
           <div className="flex gap-2 text-sm mt-5">
