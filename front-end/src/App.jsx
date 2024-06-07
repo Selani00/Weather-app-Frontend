@@ -6,6 +6,8 @@ import LandingPage from "./pages/LandingPage";
 import Login from "./pages/auth/Login";
 import Registration from "./pages/auth/Registration";
 import Weather from "./pages/Weather";
+import PrivateRouter from "./components/PrivateRouter";
+import ThemeProvider from "./components/ThemeProvider.jsx";
 
 function App() {
   return (
@@ -15,7 +17,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
 
-        <Route path="/weather" element={<Weather/>} />
+        <Route element={<PrivateRouter />}>
+          <Route path="/weather" element={<ThemeProvider><Weather /></ThemeProvider>} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
