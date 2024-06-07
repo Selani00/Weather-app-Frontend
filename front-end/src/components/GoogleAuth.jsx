@@ -24,13 +24,13 @@ const GoogleAuth = () => {
 
     try {
       const resultsFromGoogle = await signInWithPopup(auth, provider);
-      const res = await fetch('/api/auth/google',{
+      const res = await fetch('http://localhost:4000/api/auth/google',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            name : resultsFromGoogle.user.displayName,
+            username : resultsFromGoogle.user.displayName,
             email : resultsFromGoogle.user.email,            
         })
     })
