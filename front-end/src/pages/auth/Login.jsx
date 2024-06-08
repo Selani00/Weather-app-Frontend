@@ -46,7 +46,6 @@ const Login = () => {
       console.log(data);
 
       if (response.ok) {
-        
         dispatch(signInScuccess(data));
         navigate("/weather");
       }
@@ -56,62 +55,72 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen my-10">
-      <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5">
-        {/* left */}
-        <div className="flex-1">
-          <h1>For image</h1>
-        </div>
+    <div className="min-h-screen md:p-10 py-10 px-5 flex items-center justify-center">
+      <div className=" shadow-lg w-full mx-auto max-w-4xl">
+        <div className="flex  max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5">
+          {/* Right */}
+          <div className="md:order-2 flex-1">
+            <div className="p-1 md:p-3 py-5">
+              <h1 className="text-center mb-5 font-bold text-3xl">
+                Welcome Back
+              </h1>
+              <form className="flex flex-col gap-5 py-5" onSubmit={handleSubmit}>
+                <GoogleAuth />
 
-        {/* Right */}
-        <div className="flex-1">
-          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-            <div>
-              <Label value="Your Email"></Label>
-              <TextInput
-                type="email"
-                placeholder="example@gmail.com"
-                id="email"
-                onChange={handleChange}
-              ></TextInput>
-            </div>
+                <p className=" text-xs text-center">Or Login with email</p>
+                <div>
+                  <Label value="Your Email"></Label>
+                  <TextInput
+                    type="email"
+                    placeholder="example@gmail.com"
+                    id="email"
+                    onChange={handleChange}
+                  ></TextInput>
+                </div>
 
-            <div>
-              <Label value="Your Password"></Label>
-              <TextInput
-                type="password"
-                placeholder="************"
-                id="password"
-                onChange={handleChange}
-              ></TextInput>
-            </div>
-            <Button
-              type="submit"
-              disabled={loading}
-              gradientDuoTone="purpleToPink"
-            >
-              {loading ? (
-                <>
-                  <Spinner size="sm" />
-                  <span className="pl-3">Loding</span>
-                </>
-              ) : (
-                "Sign In"
-              )}
-            </Button>
-            <GoogleAuth/>
-            
-          </form>
+                <div>
+                  <Label value="Your Password"></Label>
+                  <TextInput
+                    type="password"
+                    placeholder="************"
+                    id="password"
+                    onChange={handleChange}
+                  ></TextInput>
+                </div>
+                <Button
+                  type="submit"
+                  disabled={loading}
+                  gradientDuoTone="purpleToBlue"
+                >
+                  {loading ? (
+                    <>
+                      <Spinner size="sm" />
+                      <span className="pl-3">Loding</span>
+                    </>
+                  ) : (
+                    "SIGN IN"
+                  )}
+                </Button>
+              </form>
 
-          <div className="flex gap-2 text-sm mt-5">
-              <span>Don't have an account ?</span>
-              <Link
-                to="/registration"
-                className="text-blue-500 hover:underline"
-              >
-                Sign Up
-              </Link>
+              
             </div>
+          </div>
+
+          {/* left */}
+          <div className="flex-1 flex flex-col gap-5 py-10 items-center justify-center ">
+            <div className=" md:p-4 text-center">
+              <h1 className="text-3xl font-bold text-black my-5">
+                Hello, Friend!
+              </h1>
+              <p className="text-base my-3">
+                Let's make an Account <br /> and Start journey with us
+              </p>
+              <Button pill outline gradientDuoTone="purpleToBlue"  href="/registration" className="my-5"> 
+                SIGN UP
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -5,7 +5,9 @@ const Weather = () => {
   return (
     <div>
         <Header/>
+        <div className='mt-10'>
         weather page
+        </div>
       
     </div>
   )

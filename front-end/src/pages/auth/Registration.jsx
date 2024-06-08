@@ -43,67 +43,93 @@ const Registration = () => {
   };
 
   return (
-    <div className="min-h-screen my-10">
-      <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5">
-        {/* left */}
-        <div className="flex-1">
-          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-            <div>
-              <Label value="Your Name"></Label>
-              <TextInput
-                type="text"
-                placeholder="UserName"
-                id="username"
-                onChange={handleChange}
-              ></TextInput>
+    <div className="min-h-screen md:p-10 py-10 px-5 flex items-center justify-center">
+      <div className="shadow-lg w-full mx-auto max-w-4xl">
+        <div className="flex p-3 max-w-2xl mx-auto flex-col md:flex-row md:items-center gap-5">
+          {/* left */}
+          <div className=" flex-1">
+            <div className="p-1 py-5">
+              <h1 className="text-center mb-5 font-bold text-3xl">
+                Create Account
+              </h1>
+
+              <form
+                className="flex flex-col gap-5 py-5"
+                onSubmit={handleSubmit}
+              >
+                <GoogleAuth />
+                <p className=" text-xs text-center">Or Register with email</p>
+
+                <div>
+                  <Label value="Your Name"></Label>
+                  <TextInput
+                    type="text"
+                    placeholder="UserName"
+                    id="username"
+                    onChange={handleChange}
+                  ></TextInput>
+                </div>
+
+                <div>
+                  <Label value="Your Email"></Label>
+                  <TextInput
+                    type="email"
+                    placeholder="example@gmail.com"
+                    id="email"
+                    onChange={handleChange}
+                  ></TextInput>
+                </div>
+
+                <div className="md:flex gap-5">
+                  <div className="flex-1">
+                    <Label value="Password"></Label>
+                    <TextInput
+                      type="password"
+                      placeholder="Password"
+                      id="password"
+                      onChange={handleChange}
+                    ></TextInput>
+                  </div>
+
+                  <div className="flex-1">
+                    <Label value="Confirm Password"></Label>
+                    <TextInput
+                      type="password"
+                      placeholder="Confirm Password"
+                      id="confirmpassword"
+                      onChange={handleChange}
+                    ></TextInput>
+                  </div>
+                </div>
+
+                <Button
+                  type="submit"
+                  value="Login"
+                  gradientDuoTone="purpleToBlue"
+                >
+                  Register
+                </Button>
+              </form>
+
+              
             </div>
+          </div>
 
-            <div>
-              <Label value="Your Email"></Label>
-              <TextInput
-                type="email"
-                placeholder="example@gmail.com"
-                id="email"
-                onChange={handleChange}
-              ></TextInput>
+          {/* Right */}
+          <div className="">
+          <div className=" md:p-4 text-center">
+              <h1 className="text-3xl font-bold text-black my-5">
+                Welcome Back!
+              </h1>
+              <p className="text-base my-3">
+                Your Already with Us? <br /> Please login with your account
+              </p>
+              <Button pill outline gradientDuoTone="purpleToBlue"  href="/login" className="my-5"> 
+                SIGN IN
+              </Button>
             </div>
-
-            <div>
-              <Label value="Your Password"></Label>
-              <TextInput
-                type="password"
-                placeholder="Password"
-                id="password"
-                onChange={handleChange}
-              ></TextInput>
-            </div>
-
-            <div>
-              <Label value="Your Password"></Label>
-              <TextInput
-                type="password"
-                placeholder="Confirm Password"
-                id="confirmpassword"
-                onChange={handleChange}
-              ></TextInput>
-            </div>
-
-            <Button type="submit" value="Login" gradientDuoTone="purpleToPink">
-              Register
-            </Button>
-            <GoogleAuth/>
-          </form>
-
-          <div className="flex gap-2 text-sm mt-5">
-            <span>Have an account ?</span>
-            <Link to="/login" className="text-blue-500 hover:underline">
-              Sign In
-            </Link>
           </div>
         </div>
-
-        {/* Right */}
-        <div className="flex-1">For email image</div>
       </div>
     </div>
   );
