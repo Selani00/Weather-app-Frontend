@@ -8,6 +8,7 @@ import {
   signInScuccess,
   signInFailure,
   signInStart,
+  signInStop
 } from "../../redux/user/userSlice";
 import GoogleAuth from "../../components/GoogleAuth";
 import { motion } from "framer-motion";
@@ -28,9 +29,8 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-
     if (formData.email === "" || formData.password === "") {
+      toast.error("All fields are required",{ position: "top-right" });
       return dispatch(signInFailure("All fields are required"));
     }
     try {
@@ -45,6 +45,7 @@ const Login = () => {
 
       const data = await response.json();
       if (data.success === false) {
+        toast.error(data.message,{ position: "top-right" });
         dispatch(signInFailure(data.message));
         console.log(data.message);
       }
@@ -54,15 +55,14 @@ const Login = () => {
         navigate("/weather");
       }
     } catch (err) {
+      toast.error(err.message,{ position: "top-right" });
       dispatch(signInFailure(err.message));
     }
 
-    if (errorMessage) {
-      toast.error("Error: " + errorMessage, {position: "top-right"});
-    }
+    
 
-
-
+    
+    
 
   };
 
@@ -71,7 +71,7 @@ const Login = () => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.5 }}
-      transition={{ duration: 1 }}
+      transition={{ duration: 1.2 }}
       variants={{
         hidden: { opacity: 0, x: -200 },
         visible: { opacity: 1, x: 0 },
@@ -86,11 +86,12 @@ const Login = () => {
                 <h1 className="text-center mb-5 font-bold text-3xl">
                   Welcome Back
                 </h1>
+                <GoogleAuth />
                 <form
                   className="flex flex-col gap-5 py-5"
                   onSubmit={handleSubmit}
                 >
-                  <GoogleAuth />
+                 
 
                   <p className=" text-xs text-center">Or Login with email</p>
                   <div>

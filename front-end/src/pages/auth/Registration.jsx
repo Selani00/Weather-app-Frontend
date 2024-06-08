@@ -36,8 +36,10 @@ const Registration = () => {
       formData.password === "" ||
       formData.confirmpassword === ""
     ) {
+      toast.error("All fields are required", { position: "top-right" });
       return dispatch(signInFailure("All fields are required"));
     } else if (formData.password !== formData.confirmpassword) {
+      toast.error("Passwords do not match", { position: "top-right" });
       return dispatch(signInFailure("Passwords do not match"));
     } else {
       // if so I need to keep only the password in the formData
@@ -54,8 +56,9 @@ const Registration = () => {
 
         const data = await response.json();
         if (data.success === false) {
+          toast.error(data.message, { position: "top-right" });
           dispatch(signInFailure(data.message));
-          console.log(data.message);
+          
         }
 
         if (response.ok) {
@@ -63,14 +66,13 @@ const Registration = () => {
           navigate("/weather");
         }
       } catch (err) {
+        toast.error(err.message, { position: "top-right" });
         dispatch(signInFailure(err.message));
         
       }
     }
 
-    if (errorMessage) {
-      toast.error("Error: " + errorMessage, { position: "top-right" });
-    }
+    
     
   };
 
@@ -79,7 +81,7 @@ const Registration = () => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.5 }}
-      transition={{ duration: 1 }}
+      transition={{ duration: 1.2 }}
       variants={{
         hidden: { opacity: 0, x: -200 },
         visible: { opacity: 1, x: 0 },
@@ -94,12 +96,13 @@ const Registration = () => {
                 <h1 className="text-center mb-5 font-bold text-3xl">
                   Create Account
                 </h1>
+                <GoogleAuth />
 
                 <form
                   className="flex flex-col gap-5 py-5"
                   onSubmit={handleSubmit}
                 >
-                  <GoogleAuth />
+                  
                   <p className=" text-xs text-center">Or Register with email</p>
 
                   <div>
