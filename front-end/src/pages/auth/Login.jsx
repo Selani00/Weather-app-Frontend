@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Label, TextInput, Spinner } from "flowbite-react";
+import LoginImage from "../../assets/login.png"
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,14 +10,17 @@ import {
   signInStart,
 } from "../../redux/user/userSlice";
 import GoogleAuth from "../../components/GoogleAuth";
+import { motion } from "framer-motion";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const [formData, setFormData] = useState({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  //to get the error msg and loading we use useSelector
-  const { loading, error } = useSelector((state) => state.user);
+  
+  const { loading, error:errorMessage } = useSelector((state) => state.user);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
@@ -24,6 +28,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
 
     if (formData.email === "" || formData.password === "") {
       return dispatch(signInFailure("All fields are required"));
@@ -41,9 +46,8 @@ const Login = () => {
       const data = await response.json();
       if (data.success === false) {
         dispatch(signInFailure(data.message));
+        console.log(data.message);
       }
-      //to get the login details
-      console.log(data);
 
       if (response.ok) {
         dispatch(signInScuccess(data));
@@ -52,78 +56,95 @@ const Login = () => {
     } catch (err) {
       dispatch(signInFailure(err.message));
     }
+
+    if (errorMessage) {
+      toast.error("Error: " + errorMessage, {position: "top-right"});
+    }
+
+
+
+
   };
 
   return (
-    <div className="min-h-screen md:p-10 py-10 px-5 flex items-center justify-center">
-      <div className=" shadow-lg w-full mx-auto max-w-4xl">
-        <div className="flex  max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5">
-          {/* Right */}
-          <div className="md:order-2 flex-1">
-            <div className="p-1 md:p-3 py-5">
-              <h1 className="text-center mb-5 font-bold text-3xl">
-                Welcome Back
-              </h1>
-              <form className="flex flex-col gap-5 py-5" onSubmit={handleSubmit}>
-                <GoogleAuth />
-
-                <p className=" text-xs text-center">Or Login with email</p>
-                <div>
-                  <Label value="Your Email"></Label>
-                  <TextInput
-                    type="email"
-                    placeholder="example@gmail.com"
-                    id="email"
-                    onChange={handleChange}
-                  ></TextInput>
-                </div>
-
-                <div>
-                  <Label value="Your Password"></Label>
-                  <TextInput
-                    type="password"
-                    placeholder="************"
-                    id="password"
-                    onChange={handleChange}
-                  ></TextInput>
-                </div>
-                <Button
-                  type="submit"
-                  disabled={loading}
-                  gradientDuoTone="purpleToBlue"
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.5 }}
+      transition={{ duration: 1 }}
+      variants={{
+        hidden: { opacity: 0, x: -200 },
+        visible: { opacity: 1, x: 0 },
+      }}
+    >
+      <div className="min-h-screen md:p-10 py-10 px-5 flex items-center justify-center bg-gradient-to-r from-blue-900 via-indigo-600 to-blue-900">
+        <div className="shadow-2xl w-full mx-auto max-w-4xl bg-white  rounded-3xl">
+          <div className="flex p-5 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5">
+            {/* Right */}
+            <div className="md:order-2 flex-1 ">
+              <div className="p-1 md:p-3 py-5">
+                <h1 className="text-center mb-5 font-bold text-3xl">
+                  Welcome Back
+                </h1>
+                <form
+                  className="flex flex-col gap-5 py-5"
+                  onSubmit={handleSubmit}
                 >
-                  {loading ? (
-                    <>
-                      <Spinner size="sm" />
-                      <span className="pl-3">Loding</span>
-                    </>
-                  ) : (
-                    "SIGN IN"
-                  )}
-                </Button>
-              </form>
+                  <GoogleAuth />
 
-              
+                  <p className=" text-xs text-center">Or Login with email</p>
+                  <div>
+                    <Label value="Your Email"></Label>
+                    <TextInput
+                      type="email"
+                      placeholder="example@gmail.com"
+                      id="email"
+                      onChange={handleChange}
+                    ></TextInput>
+                  </div>
+
+                  <div>
+                    <Label value="Your Password"></Label>
+                    <TextInput
+                      type="password"
+                      placeholder="************"
+                      id="password"
+                      onChange={handleChange}
+                    ></TextInput>
+                  </div>
+                  <Button
+                    type="submit"
+                    disabled={loading}
+                    gradientDuoTone="purpleToBlue"
+                  >
+                    {loading ? (
+                      <>
+                        <Spinner size="sm" />
+                        <span className="pl-3">Loding</span>
+                      </>
+                    ) : (
+                      "SIGN IN"
+                    )}
+                  </Button>
+                </form>
+                <div className="flex gap-2 text-sm ">
+                  <span>Don't have an account ?</span>
+                  <Link to="/registration" className="text-blue-500 hover:underline">
+                    Sign Up
+                  </Link>
+                </div>
+              </div>
             </div>
-          </div>
 
-          {/* left */}
-          <div className="flex-1 flex flex-col gap-5 py-10 items-center justify-center ">
-            <div className=" md:p-4 text-center">
-              <h1 className="text-3xl font-bold text-black my-5">
-                Hello, Friend!
-              </h1>
-              <p className="text-base my-3">
-                Let's make an Account <br /> and Start journey with us
-              </p>
-              <Button pill outline gradientDuoTone="purpleToBlue"  href="/registration" className="my-5"> 
-                SIGN UP
-              </Button>
+            {/* left */}
+            <div className="flex-1  gap-5 py-10 hidden lg:inline">
+              <img src={LoginImage} alt="login" className="object-cover w-120 h-120 " />
             </div>
           </div>
         </div>
+        <ToastContainer autoClose={2500} hideProgressBar={true} theme="colored"/>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

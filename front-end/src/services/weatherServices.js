@@ -10,9 +10,9 @@ const getWeatherData = (infoType, searchParams) => {
   });
 
   
-    return fetch(url)
-      .then((res) => res.json())
-      .then((data) => data);
+    // return fetch(url)
+    //   .then((res) => res.json())
+    //   .then((data) => data);
 };
 
 // format the icon and data
