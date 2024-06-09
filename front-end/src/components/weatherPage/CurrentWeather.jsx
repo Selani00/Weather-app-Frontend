@@ -29,16 +29,17 @@ const CurrentWeather = ({
       <div className="py-5 md:py-3 border border-black dark:border-white rounded-lg ">
         <div className="flex-row md:flex items-center justify-between gap-5 px-5 md:px-10 w-full">
           <div className="md:order-2 flex flex-col items-center pb-2">
-            <img
-              src={icon}
-              className="w-40 h-40 object-cover"
-            />
+            <img src={icon} className="w-40 h-40 object-cover" />
             <p className="text-3xl font-bold text-center">{details}</p>
           </div>
 
           <div className="text-center md:order-1 md:mt-10">
-            <p className="text-xl font-semibold ">{name}, {country}</p>
-            <p className="text-base text-center font-base">{formattedLocalTime}</p>
+            <p className="text-xl font-semibold ">
+              {name}, {country}
+            </p>
+            <p className="text-base text-center font-base">
+              {formattedLocalTime}
+            </p>
           </div>
 
           <div className="mt-5 md:mt-10 md:text-start text-center">
@@ -51,13 +52,18 @@ const CurrentWeather = ({
           </div>
         </div>
         <div className="mt-5 flex items-center justify-center gap-5 md:gap-10 text-center text-base font-semibold ">
-          
           <div className="flex items-center justify-center gap-1">
-            <GiSunrise className="w-6 h-6" />
+            <div>
+              <GiSunrise className="w-6 h-6" />
+              <p>sunrise</p>
+            </div>
             <p>{sunrise}</p>
           </div>
           <div className="flex items-center justify-center gap-1">
-            <GiSunset className="w-6 h-6" />
+            <div className="flex-row">
+              <GiSunset className="w-6 h-6" />
+              <p>sunset</p>
+            </div>
             <p>{sunset}</p>
           </div>
         </div>
@@ -71,14 +77,16 @@ const CurrentWeather = ({
                 <FaWind className="w-6 h-6" />
                 <p className="text-sx">Wind</p>
               </div>
-              <p className="text-center font-bold text-lg">{speed}</p>
+              <p className="text-center font-bold text-lg">{speed} km/h</p>
             </div>
             <div className="my-5">
               <div className="flex items-center justify-center gap-2 ">
                 <WiHumidity className="w-7 h-7" />
                 <p className="text-sx">Humidity</p>
               </div>
-              <p className="text-center font-bold text-lg">{humidity.toFixed()}</p>
+              <p className="text-center font-bold text-lg">
+                {humidity.toFixed()} %
+              </p>
             </div>
           </div>
           <div>
@@ -87,14 +95,16 @@ const CurrentWeather = ({
                 <IoSpeedometerSharp className="w-6 h-6" />
                 <p className="text-sx">Pressure</p>
               </div>
-              <p className="text-center font-bold text-lg">{pressure} </p>
+              <p className="text-center font-bold text-lg">{pressure} mb</p>
             </div>
             <div className="mt-5">
               <div className="flex items-center justify-center gap-2 ">
                 <BiSolidSun className="w-6 h-6" />
                 <p className="text-sx">Feels Like</p>
               </div>
-              <p className="text-center font-bold text-lg">{feels_like.toFixed()}° </p>
+              <p className="text-center font-bold text-lg">
+                {feels_like.toFixed()}°{" "}
+              </p>
             </div>
           </div>
         </div>

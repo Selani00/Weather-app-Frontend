@@ -11,6 +11,7 @@ const HourlyForecast = ({data}) => {
                     <div key={index} className='border border-gray-400 dark:border-gray-600 p-5 rounded-3xl flex flex-col items-center gap-2 min-w-max'>
                         <p className='font-semibold'>{item.title}</p>
                         <img src={item.icon} alt='icon' className='w-12 h-12'/>
+                        <p className='text-xs uppercase mt-0'>{item.details}</p>
                         <p className='font-bold text-xl'>{item.temp.toFixed()}°</p>
                     </div>
                 ))}

@@ -74,6 +74,7 @@ const iconUrlFromCode = (icon) =>
         title : formatToLocalTime(f.dt, offset, "hh:mm a"),
         icon: iconUrlFromCode(f.weather[0].icon),
         date : f.dt_txt,
+        details: f.weather[0].description
         
     })).slice(0,5);
 
@@ -86,8 +87,8 @@ const iconUrlFromCode = (icon) =>
         icon: iconUrlFromCode(f.weather[0].icon),
         date : f.dt_txt,
         humidity: f.main.humidity,
-        pressure: f.main.pressure,
         wind: f.wind.speed,
+        details: f.weather[0].description
     }))
 
     return {hourly, daily}

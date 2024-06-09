@@ -56,7 +56,7 @@ const Registration = () => {
 
         if (response.ok) {
           dispatch(signInScuccess(data));
-          navigate("/weather");
+          navigate("/login");
         }
       } catch (err) {
         toast.error(err.message, { position: "top-right" });
