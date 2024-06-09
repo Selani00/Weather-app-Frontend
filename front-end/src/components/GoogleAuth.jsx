@@ -1,6 +1,4 @@
 import React from "react";
-import { Button } from "flowbite-react";
-import { AiFillGoogleCircle } from "react-icons/ai";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import { app } from "../firebase";
 import { useDispatch } from "react-redux";
@@ -22,7 +20,7 @@ const GoogleAuth = () => {
 
     try {
       const resultsFromGoogle = await signInWithPopup(auth, provider);
-      const res = await fetch("http://localhost:4000/api/auth/google", {
+      const res = await fetch("https://us-central1-weather-app-3a7ba.cloudfunctions.net/api/api/auth/google", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

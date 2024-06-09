@@ -31,7 +31,7 @@ const iconUrlFromCode = (icon) =>
     
     const {
       coord: { lon, lat },
-      main: { temp, feels_like, temp_min, temp_max, pressure, humidity,uvi },
+      main: { temp, feels_like, temp_min, temp_max, pressure, humidity},
       name,
       dt,
       sys: { country, sunrise, sunset },

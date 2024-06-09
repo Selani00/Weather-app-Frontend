@@ -3,7 +3,7 @@ import { FaSearchLocation } from "react-icons/fa";
 import { TbCurrentLocation } from "react-icons/tb";
 
 const InputSection = ({setQuary, setUnits}) => {
-  const [selected, setSelected] = useState("F");
+  const [selected, setSelected] = useState("C");
   const [city, setCity] = useState("");
 
   const handleSearch = () => {

@@ -1,36 +1,9 @@
 import React from 'react'
 
 const HourlyForecast = ({data}) => {
-    // const data = [
-    //     {
-    //         time: '12:00 PM',
-    //         icon : 'https://www.weatherbit.io/static/img/icons/c02d.png',
-    //         temp: 25
-    //     },
-    //     {
-    //         time: '12:00 PM',
-    //         icon : 'https://www.weatherbit.io/static/img/icons/c02d.png',
-    //         temp: 25
-    //     },
-    //     {
-    //         time: '12:00 PM',
-    //         icon : 'https://www.weatherbit.io/static/img/icons/c02d.png',
-    //         temp: 25
-    //     },
-    //     {
-    //         time: '12:00 PM',
-    //         icon : 'https://www.weatherbit.io/static/img/icons/c02d.png',
-    //         temp: 25
-    //     },
-    //     {
-    //         time: '12:00 PM',
-    //         icon : 'https://www.weatherbit.io/static/img/icons/c02d.png',
-    //         temp: 25
-    //     },
 
-    // ]
   return (
-    <div className='my-5 shadow-2xl rounded-lg bg-gray-200 border-gray-300  dark:bg-gray-800 dark:border-gray-600 '>
+    <div className='my-5 shadow-2xl rounded-lg bg-blue-100 border-gray-300  dark:bg-gray-800 dark:border-gray-600 '>
         <div className='p-5'>
             <h1 className='text-start font-bold text-xl'>Hourly Forcase</h1>
             <div className='mt-4 py-1 px-5 lg:px-15 flex items-center justify-between gap-5 overflow-x-auto'>

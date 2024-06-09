@@ -27,9 +27,8 @@ const LandingPage = () => {
         </p>
         <TypeAnimation
           sequence={[
-            // Same substring at the start will only be typed out once, initially
             "Real-time weather updates",
-            1000, // wait 1s before replacing "Mice" with "Hamsters"
+            1000,
             "Hourly weather forecasts",
             1000,
             "Daily weather forecasts",
@@ -43,7 +42,6 @@ const LandingPage = () => {
           className="inline-block text-xl my-6 font-extrabold"
         />
 
-        
         <Link to={currentUser ? "/weather" : "/login"}>
           <div className="mt-5 text-center border glowing-border rounded-full py-3 px-5 font-semibold hover:scale-125 cursor-pointer transition duration-300 ease-in-out">
             <p className="glowing-button text-xl">Get Started...</p>

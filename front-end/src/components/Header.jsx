@@ -3,11 +3,13 @@ import { useSelector } from "react-redux";
 import { signoutSuccess } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
 import { FaMoon, FaSun } from "react-icons/fa";
 import { toggleTheme } from "../redux/theme/themeSlice";
 import { IoMdHome, IoMdLogOut } from "react-icons/io";
 import { IoPerson } from "react-icons/io5";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Header = () => {
   const { theme } = useSelector((state) => state.theme);
@@ -18,18 +20,19 @@ const Header = () => {
 
   const handleSignOut = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/auth/signout", {
+      const response = await fetch("https://us-central1-weather-app-3a7ba.cloudfunctions.net/api/api/auth/signout", {
         method: "POST",
       });
 
       if (!response.ok) {
-        console.log("error signing out");
+        toast.error("error signing out", { position: "top-right" });
       } else {
         dispatch(signoutSuccess());
         navigate("/");
       }
     } catch (err) {
-      console.log(err);
+      toast.error("Error:" + err, { position: "top-right" });
+      
     }
   };
   return (
@@ -73,6 +76,11 @@ const Header = () => {
           </div>
         </div>
       </div>
+      <ToastContainer
+          autoClose={2500}
+          hideProgressBar={true}
+          theme="colored"
+        />
     </nav>
   );
 };

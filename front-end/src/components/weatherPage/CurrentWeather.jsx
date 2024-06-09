@@ -15,10 +15,8 @@ const CurrentWeather = ({
     temp_max,
     pressure,
     details,
-    description,
     humidity,
     speed,
-    uvi,
     sunrise,
     sunset,
     name,
@@ -28,7 +26,7 @@ const CurrentWeather = ({
 }) => {
   return (
     <div className="w-full">
-      <div className="py-5 md:py-3 border rounded-lg ">
+      <div className="py-5 md:py-3 border border-black dark:border-white rounded-lg ">
         <div className="flex-row md:flex items-center justify-between gap-5 px-5 md:px-10 w-full">
           <div className="md:order-2 flex flex-col items-center pb-2">
             <img
@@ -65,7 +63,7 @@ const CurrentWeather = ({
         </div>
       </div>
 
-      <div className="mt-5 shadow-2xl rounded-lg bg-gray-200 border-gray-300  dark:bg-gray-800 dark:border-gray-600 pt-5 pb-2 px-2 md:px-20">
+      <div className="mt-5 shadow-2xl rounded-lg bg-blue-100 border-gray-300  dark:bg-gray-800 dark:border-gray-600 pt-5 pb-2 px-2 md:px-20">
         <div className="flex items-start justify-between ">
           <div>
             <div>

@@ -10,7 +10,7 @@ const firebaseConfig = {
   projectId: "weather-app-3a7ba",
   storageBucket: "weather-app-3a7ba.appspot.com",
   messagingSenderId: "744654142911",
-  appId: "1:744654142911:web:b533eb3e1f4987b8a4350a"
+  appId: "1:744654142911:web:b533eb3e1f4987b8a4350a",
 };
 
 // Initialize Firebase

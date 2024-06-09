@@ -1,27 +1,19 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Label, TextInput, Spinner } from "flowbite-react";
-import LoginImage from "../../assets/login.png"
-
-import { useDispatch, useSelector } from "react-redux";
-import {
-  signInScuccess,
-  signInFailure,
-  signInStart,
-  signInStop
-} from "../../redux/user/userSlice";
+import LoginImage from "../../assets/login.png";
+import { useDispatch } from "react-redux";
+import { signInScuccess } from "../../redux/user/userSlice";
 import GoogleAuth from "../../components/GoogleAuth";
 import { motion } from "framer-motion";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [formData, setFormData] = useState({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  
-  const { loading, error:errorMessage } = useSelector((state) => state.user);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
@@ -30,24 +22,24 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.email === "" || formData.password === "") {
-      toast.error("All fields are required",{ position: "top-right" });
-      return dispatch(signInFailure("All fields are required"));
+      toast.error("All fields are required", { position: "top-right" });
     }
     try {
-      dispatch(signInStart());
-      const response = await fetch("http://localhost:4000/api/auth/signin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      setLoading(true);
+      const response = await fetch(
+        "https://us-central1-weather-app-3a7ba.cloudfunctions.net/api/api/auth/signin",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const data = await response.json();
       if (data.success === false) {
-        toast.error(data.message,{ position: "top-right" });
-        dispatch(signInFailure(data.message));
-        console.log(data.message);
+        toast.error(data.message, { position: "top-right" });
       }
 
       if (response.ok) {
@@ -55,15 +47,9 @@ const Login = () => {
         navigate("/weather");
       }
     } catch (err) {
-      toast.error(err.message,{ position: "top-right" });
-      dispatch(signInFailure(err.message));
+      toast.error(err.message, { position: "top-right" });
     }
-
-    
-
-    
-    
-
+    setLoading(false);
   };
 
   return (
@@ -91,8 +77,6 @@ const Login = () => {
                   className="flex flex-col gap-5 py-5"
                   onSubmit={handleSubmit}
                 >
-                 
-
                   <p className=" text-xs text-center">Or Login with email</p>
                   <div>
                     <Label value="Your Email"></Label>
@@ -130,7 +114,10 @@ const Login = () => {
                 </form>
                 <div className="flex gap-2 text-sm ">
                   <span>Don't have an account ?</span>
-                  <Link to="/registration" className="text-blue-500 hover:underline">
+                  <Link
+                    to="/registration"
+                    className="text-blue-500 hover:underline"
+                  >
                     Sign Up
                   </Link>
                 </div>
@@ -139,11 +126,19 @@ const Login = () => {
 
             {/* left */}
             <div className="flex-1  gap-5 py-10 hidden lg:inline">
-              <img src={LoginImage} alt="login" className="object-cover w-120 h-120 " />
+              <img
+                src={LoginImage}
+                alt="login"
+                className="object-cover w-120 h-120 "
+              />
             </div>
           </div>
         </div>
-        <ToastContainer autoClose={2500} hideProgressBar={true} theme="colored"/>
+        <ToastContainer
+          autoClose={2500}
+          hideProgressBar={true}
+          theme="colored"
+        />
       </div>
     </motion.div>
   );

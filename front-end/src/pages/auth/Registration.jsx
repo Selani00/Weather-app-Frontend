@@ -3,32 +3,31 @@ import { Button, Label, TextInput, Spinner } from "flowbite-react";
 import GoogleAuth from "../../components/GoogleAuth";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  signInScuccess,
-  signInFailure,
-  signInStart,
-} from "../../redux/user/userSlice";
+import { useDispatch} from "react-redux";
+import {signInScuccess} from "../../redux/user/userSlice";
 import RegistrationImage from "../../assets/registration.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Registration = () => {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmpassword: ""
+  });
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const { loading, error: errorMessage } = useSelector((state) => state.user);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
-    console.log("formData", formData);
+    
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-
     if (
       
       formData.username === "" ||
@@ -37,16 +36,13 @@ const Registration = () => {
       formData.confirmpassword === ""
     ) {
       toast.error("All fields are required", { position: "top-right" });
-      return dispatch(signInFailure("All fields are required"));
     } else if (formData.password !== formData.confirmpassword) {
       toast.error("Passwords do not match", { position: "top-right" });
-      return dispatch(signInFailure("Passwords do not match"));
-    } else {
-      // if so I need to keep only the password in the formData
+    } else {    
       delete formData.confirmpassword;
       try {
-        dispatch(signInStart());
-        const response = await fetch("http://localhost:4000/api/auth/signup", {
+        setLoading(true);
+        const response = await fetch("https://us-central1-weather-app-3a7ba.cloudfunctions.net/api/api/auth/signup", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -56,9 +52,7 @@ const Registration = () => {
 
         const data = await response.json();
         if (data.success === false) {
-          toast.error(data.message, { position: "top-right" });
-          dispatch(signInFailure(data.message));
-          
+          toast.error(data.message, { position: "top-right" });        
         }
 
         if (response.ok) {
@@ -67,13 +61,15 @@ const Registration = () => {
         }
       } catch (err) {
         toast.error(err.message, { position: "top-right" });
-        dispatch(signInFailure(err.message));
-        
       }
     }
-
-    
-    
+    setFormData({
+      username: "",
+      email: "",
+      password: "",
+      confirmpassword: ""
+    });
+    setLoading(false);
   };
 
   return (
@@ -111,6 +107,7 @@ const Registration = () => {
                       type="text"
                       placeholder="UserName"
                       id="username"
+                      value={formData.username}
                       onChange={handleChange}
                     ></TextInput>
                   </div>
@@ -121,6 +118,7 @@ const Registration = () => {
                       type="email"
                       placeholder="example@gmail.com"
                       id="email"
+                      value={formData.email}
                       onChange={handleChange}
                     ></TextInput>
                   </div>
@@ -132,6 +130,7 @@ const Registration = () => {
                         type="password"
                         placeholder="Password"
                         id="password"
+                        value={formData.password}
                         onChange={handleChange}
                       ></TextInput>
                     </div>
@@ -142,6 +141,7 @@ const Registration = () => {
                         type="password"
                         placeholder="Confirm Password"
                         id="confirmpassword"
+                        value={formData.confirmpassword}
                         onChange={handleChange}
                       ></TextInput>
                     </div>
