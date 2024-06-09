@@ -31,7 +31,7 @@ A fully functional, live application with user authentication and weather inform
 
 **Installation process**
 
-- Before start the frontend you need to clone the Backend. Git link for backend 
+- Before starting the frontend you need to clone the Backend. GitHub link for backend 
 https://github.com/Selani00/Weather-App.git 
 
 - Download or Clone the repository. 
@@ -51,13 +51,12 @@ https://github.com/Selani00/Weather-App.git
 ### Technological choices
 
 Why react + vite ?
- - React +vite is faster than normal react app. *npm create vite@latest* creates the app faster then *npx create-react-app my-app*. Also, vite speeds up the development feedback loop. 
+ - React +vite is faster than normal react app. *'npm create vite@latest'* creates the app faster then *'npx create-react-app'*. Also, vite speeds up the development feedback loop. 
 
 Dependencies Use
 - **@reduxjs/toolkit** - To write Redux logic
 - **firebase** - Integration with Firebase services for authentication
 - **flowbite-react** - To get React components and UI elements
-- **framer-motion** - To add page transitions
 - **luxon** - To handle dates and times in weather information
 - **react** - To build user interfaces with React
 - **react-dom** - To interact with the DOM
@@ -72,13 +71,9 @@ Dependencies Use
 
 - Create account in vercel
 - Create new project
-- Connect github account and select this repository and click install to install the repo
+- Connect github account and select this repository then click install to install the repo
 - Select vite as a framework
-- Add environment variable
+- Add environment variables
 - Deployed
 
 **Website Link** - https://weather-app-frontend-three.vercel.app/
-
-
-
-    
