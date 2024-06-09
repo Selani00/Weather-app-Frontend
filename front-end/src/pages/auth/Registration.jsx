@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Button, Label, TextInput, Spinner } from "flowbite-react";
 import GoogleAuth from "../../components/GoogleAuth";
-// import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch} from "react-redux";
 import {signInScuccess} from "../../redux/user/userSlice";
@@ -73,16 +72,6 @@ const Registration = () => {
   };
 
   return (
-    // <motion.div
-    //   initial="hidden"
-    //   whileInView="visible"
-    //   viewport={{ once: true, amount: 0.5 }}
-    //   transition={{ duration: 1.2 }}
-    //   variants={{
-    //     hidden: { opacity: 0, x: -200 },
-    //     visible: { opacity: 1, x: 0 },
-    //   }}
-    // >
       <div className="min-h-screen md:p-10 py-10 px-5 flex items-center justify-center bg-gradient-to-r from-blue-900 via-indigo-600 to-blue-900">
         <div className="container relative z-2 shadow-2xl w-full mx-auto max-w-4xl bg-white rounded-3xl">
           <div className="flex p-3 max-w-2xl mx-auto flex-col md:flex-row md:items-center gap-5">
@@ -187,7 +176,6 @@ const Registration = () => {
           theme="colored"
         />
       </div>
-    // </motion.div>
   );
 };
 
