@@ -15,3 +15,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
+
+// export const uiConfigRedirect = {
+//   signInSuccessUrl: '/weather',  
+  
+//   signInFlow: 'redirect',
+// };
