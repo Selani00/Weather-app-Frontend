@@ -20,7 +20,7 @@ const GoogleAuth = () => {
 
     try {
       const resultsFromGoogle = await signInWithPopup(auth, provider);
-      const res = await fetch("https://us-central1-weather-app-3a7ba.cloudfunctions.net/api/api/auth/google", {
+      const res = await fetch("https://weather-app-m4zg.onrender.com/api/auth/google", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

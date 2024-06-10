@@ -27,7 +27,7 @@ const Login = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        "https://us-central1-weather-app-3a7ba.cloudfunctions.net/api/api/auth/signin",
+        "https://weather-app-m4zg.onrender.com/api/auth/signin",
         {
           method: "POST",
           headers: {

@@ -20,7 +20,7 @@ const Header = () => {
 
   const handleSignOut = async () => {
     try {
-      const response = await fetch("https://us-central1-weather-app-3a7ba.cloudfunctions.net/api/api/auth/signout", {
+      const response = await fetch("https://weather-app-m4zg.onrender.com/api/auth/signout", {
         method: "POST",
       });
 
